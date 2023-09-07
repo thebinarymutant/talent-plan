@@ -15,7 +15,8 @@ fn main() {
                         .help("The string value of the key")
                         .required(true),
                 ),
-        ).subcommand(
+        )
+        .subcommand(
             Command::new("get")
                 .about("Get the string value of a given string key")
                 .arg(Arg::new("KEY").help("A string key").required(true)),
@@ -28,15 +29,15 @@ fn main() {
         .get_matches();
 
     match matches.subcommand() {
-        Some(("set", value)) => {
+        Some(("set", _value)) => {
             eprintln!("unimplemented");
             exit(1);
         }
-        Some(("get", value)) => {
+        Some(("get", _value)) => {
             eprintln!("unimplemented");
             exit(1);
         }
-        Some(("rm", value)) => {
+        Some(("rm", _value)) => {
             eprintln!("unimplemented");
             exit(1);
         }
