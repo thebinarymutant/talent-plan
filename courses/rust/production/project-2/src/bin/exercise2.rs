@@ -9,7 +9,7 @@ use serde::{Deserialize, Serialize};
 use std::fmt;
 use std::io::BufWriter;
 
-// Run using command `cargo run --bin exercise1
+// Run using command `cargo run --bin exercise2
 
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Direction {
