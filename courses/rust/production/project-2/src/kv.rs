@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
 
 /// The `KvStore` stores string key/value pairs.
@@ -13,7 +14,7 @@ use std::collections::HashMap;
 /// let val = store.get("key".to_owned());
 /// assert_eq!(val, Some("value".to_owned()));
 /// ```
-#[derive(Default)]
+#[derive(Default, Serialize, Deserialize, Debug)]
 pub struct KvStore {
     store: HashMap<String, String>,
 }

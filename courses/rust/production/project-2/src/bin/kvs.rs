@@ -1,4 +1,5 @@
 use clap::{Arg, Command};
+use kvs::KvStore;
 use std::process::exit;
 
 fn main() {
@@ -9,7 +10,7 @@ fn main() {
         .subcommand(
             Command::new("set")
                 .about("Set value of key string to a string")
-                .arg(Arg::new("key").help("A string key").required(true))
+                .arg(Arg::new("KEY").help("A string key").required(true))
                 .arg(
                     Arg::new("VALUE")
                         .help("The string value of the key")
@@ -28,18 +29,24 @@ fn main() {
         )
         .get_matches();
 
+    let mut store = KvStore::new();
+
     match matches.subcommand() {
-        Some(("set", _value)) => {
-            eprintln!("unimplemented");
-            exit(1);
+        Some(("set", args)) => {
+            let key = args.get_one::<String>("KEY").unwrap();
+            let value = args.get_one::<String>("VALUE").unwrap();
+            store.set(key.clone(), value.clone());
+            exit(0);
         }
-        Some(("get", _value)) => {
-            eprintln!("unimplemented");
-            exit(1);
+        Some(("get", args)) => {
+            let key = args.get_one::<String>("KEY").unwrap();
+            store.get(key.clone());
+            exit(0);
         }
-        Some(("rm", _value)) => {
-            eprintln!("unimplemented");
-            exit(1);
+        Some(("rm", args)) => {
+            let key = args.get_one::<String>("KEY").unwrap();
+            store.remove(key.clone());
+            exit(0);
         }
         _ => unreachable!(),
     }
